@@ -44,7 +44,7 @@
         <div class="col-sm-3 sidenav">
             <h4>Blog</h4>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="home.jsp">Home</a></li>
+                <li class="active"><a href="board/home.jsp">Home</a></li>
                 <li><a href="/NewsBoard/boardview">NewsBoard</a></li>
                 <li><a href="#section3">Family</a></li>
                 <li><a href="#section3">Photos</a></li>

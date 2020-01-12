@@ -87,7 +87,10 @@
                </tr>
                <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
                    System.out.println(list.size());
-                  for(int i =0; i<list.size();i++){ %>
+
+                  for(int i =0; i<list.size();i++){
+
+               %>
                <tr>
                    <td><%=list.get(i).getId() %></td>
                    <td><%=list.get(i).getName() %></td>
