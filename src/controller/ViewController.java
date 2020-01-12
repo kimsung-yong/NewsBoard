@@ -41,6 +41,9 @@ public class ViewController extends HttpServlet {
         }else if(action.equals("search")){ // 검색
             new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
+        }else if(action.equals("detailview")){
+            new SearchFucntion(request,response);
+            request.getRequestDispatcher("/board/detailPage.jsp").forward(request,response);
         }
 
 

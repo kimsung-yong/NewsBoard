@@ -91,7 +91,10 @@
                <tr>
                    <td><%=list.get(i).getId() %></td>
                    <td><%=list.get(i).getName() %></td>
-                   <td><a href="#"><%=list.get(i).getTitle() %></a></td>
+                   <td><a href="http://localhost:8080/NewsBoard/boardview?action=detailview&searchtype=id&search=<%
+                   list.get(i).getId();
+                   %>">
+                       <%=list.get(i).getTitle() %></a></td>
                    <td><%=list.get(i).getWriteDate() %></td>
                    <td><%=list.get(i).getViewCount() %></td>
                </tr>
