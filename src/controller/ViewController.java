@@ -1,6 +1,9 @@
 package controller;
 
+import dao.NewsBoardDao;
+import dto.NewsBoardDto;
 import fucntion.ListFucntion;
+import fucntion.SearchFucntion;
 import fucntion.WriteFucntion;
 
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/boardview")
 public class ViewController extends HttpServlet {
@@ -27,13 +31,15 @@ public class ViewController extends HttpServlet {
 
 
 
-        if(action == null){
+        if(action == null){ // 처음 글목록
             new ListFucntion(request,response);
-
             request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
-        }else if(action.equals("write")){
+        }else if(action.equals("write")){ // 글쓰기
             new WriteFucntion(request,response);
             new ListFucntion(request,response);
+            request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
+        }else if(action.equals("search")){ // 검색
+            new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
         }
 

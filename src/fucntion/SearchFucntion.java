@@ -6,14 +6,14 @@ import dto.NewsBoardDto;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ListFucntion extends HttpServlet {
-    public ListFucntion(HttpServletRequest request, HttpServletResponse response){
+public class SearchFucntion extends HttpServlet {
+    public SearchFucntion(HttpServletRequest request, HttpServletResponse response) {
+        String search = request.getParameter("search");
+        String searchtype = request.getParameter("searchtype");
         NewsBoardDao dao = new NewsBoardDao();
-        List<NewsBoardDto> list = dao.selectAll();
-        HttpSession session = request.getSession();
+        List<NewsBoardDto> list = dao.select(search,searchtype);
         request.setAttribute("list",list);
     }
 }

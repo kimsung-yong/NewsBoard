@@ -72,7 +72,7 @@
 
 
                   <input type="text" name="title" placeholder="제목을 입력하세요"><br><br>
-
+\
                   <textarea name="content" id="" cols="30" rows="10" placeholder="내용을 입력하세요"></textarea>
                   <br>
                   <input type="submit" value="저장"><input type="reset" value="재작성">

@@ -49,6 +49,9 @@
         th{
             text-align: center;
         }
+        .btn_sc{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -82,19 +85,29 @@
                    <th>날짜</th>
                    <th>조회수</th>
                </tr>
-               <% List<NewsBoardDto> list = (List<NewsBoardDto>) session.getAttribute("list");
+               <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
                    System.out.println(list.size());
                   for(int i =0; i<list.size();i++){ %>
                <tr>
                    <td><%=list.get(i).getId() %></td>
                    <td><%=list.get(i).getName() %></td>
-                   <td><%=list.get(i).getTitle() %></td>
+                   <td><a href="#"><%=list.get(i).getTitle() %></a></td>
                    <td><%=list.get(i).getWriteDate() %></td>
                    <td><%=list.get(i).getViewCount() %></td>
                </tr>
                  <% } %>
 
            </table>
+            <br>
+            <form class="btn_sc" action="/NewsBoard/boardview" method="get">
+                <select name="searchtype">
+                    <option value="title">제목</option>
+                </select>
+                <input type="search" name = "search">
+                <input type="hidden" name="action" value="search">
+                <input type="submit" value="검색">
+            </form>
+
             <input type="button" value="글쓰기" onclick="writeclick()" class="btn_write">
         </div>
     </div>

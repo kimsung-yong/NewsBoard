@@ -57,7 +57,7 @@ public class NewsBoardDao {
 
     }
 
-    public List<NewsBoardDto> select(){
+    public List<NewsBoardDto> selectAll(){
         conDB();
         try{
             ps = con.prepareStatement("select * from newsboard");
@@ -74,12 +74,33 @@ public class NewsBoardDao {
                 dto.setWriteDate(rs.getDate("writedate"));
                 dto.setViewCount(rs.getLong("viewcount"));
                 list.add(dto);
-
-
             }
             return list;
         }catch (Exception e){
             System.out.println("select 오류 :" + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<NewsBoardDto> select(String search,String searchtype){
+        conDB();
+        List<NewsBoardDto> list = new ArrayList<>();
+        try{
+            NewsBoardDto dto = new NewsBoardDto();
+            ps = con.prepareStatement("select * from newsboard where " + searchtype +" like'%"+search+"%'");
+            rs = ps.executeQuery();
+            while (rs.next()){
+                dto.setId(rs.getLong("id"));
+                dto.setName(rs.getString("name"));
+                dto.setTitle(rs.getString("title"));
+                dto.setWriteDate(rs.getDate("writedate"));
+                dto.setViewCount(rs.getLong("viewcount"));
+                list.add(dto);
+            }
+
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
 
