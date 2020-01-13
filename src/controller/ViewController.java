@@ -4,6 +4,7 @@ import dao.NewsBoardDao;
 import dto.NewsBoardDto;
 import fucntion.ListFucntion;
 import fucntion.SearchFucntion;
+import fucntion.ViewCountFucntion;
 import fucntion.WriteFucntion;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,7 @@ public class ViewController extends HttpServlet {
             new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
         }else if(action.equals("detailview")){
+            new ViewCountFucntion(request,response);
             new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/detailPage.jsp").forward(request,response);
         }

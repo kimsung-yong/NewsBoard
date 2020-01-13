@@ -79,6 +79,14 @@ public class NewsBoardDao {
         }catch (Exception e){
             System.out.println("select 오류 :" + e.getMessage());
             return null;
+        }finally {
+            try {
+                con.close();
+                rs.close();
+                ps.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -93,6 +101,7 @@ public class NewsBoardDao {
                 dto.setId(rs.getLong("id"));
                 dto.setName(rs.getString("name"));
                 dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
                 dto.setWriteDate(rs.getDate("writedate"));
                 dto.setViewCount(rs.getLong("viewcount"));
                 list.add(dto);
@@ -102,10 +111,36 @@ public class NewsBoardDao {
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }finally {
+            try {
+                con.close();
+                rs.close();
+                ps.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    public void countAdd(long id){
+        conDB();
+
+
+        try{
+            ps = con.prepareStatement("update Newsboard set viewcount=viewcount+1 where id=?");
+            ps.setLong(1,id);
+            ps.executeQuery();
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+            try {
+                con.close();
+                ps.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
-
     }
-
 
 }

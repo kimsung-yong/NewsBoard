@@ -35,6 +35,33 @@
             }
             .row.content {height: auto;}
         }
+        .col-sm-9{
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .col-sm-9 table{
+
+
+            width: 100%;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .col-sm-9 table td{
+            border-bottom: 1px solid;
+            /*solid #444444;*/
+            /*padding: 10px;*/
+        }
+        #tb_tr1{
+            height: 50px;
+        }
+        #tb_tr2{
+            height: 50px;
+        }
+        #tb_tr3{
+            height: 400px;
+        }
     </style>
 </head>
 <body>
@@ -63,14 +90,34 @@
             <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
                 System.out.println(list.size());
                 for(int i =0; i<list.size();i++){ %>
+            <table>
 
-            <%=list.get(i).getId() %>
-            <%=list.get(i).getName() %>
-            <%=list.get(i).getTitle() %>
-            <%=list.get(i).getWriteDate() %>
-            <%=list.get(i).getViewCount() %>
+                <tr id="tb_tr1">
+                    <td>글번호</td>
+                    <td><%=list.get(i).getId() %></td>
+                    <td>작성자</td>
+                    <td><%=list.get(i).getName() %></td>
+                    <td>작성날짜</td>
+                    <td><%=list.get(i).getWriteDate() %></td>
+                    <td>조회수</td>
+                    <td><%=list.get(i).getViewCount() %></td>
+                </tr>
+                <tr id="tb_tr2">
+                    <td colspan="8"><%=list.get(i).getTitle() %></td>
+                </tr>
+                <tr id="tb_tr3">
+                    <td colspan="8"><%=list.get(i).getContent()%></td>
+                </tr>
+                <% } %>
+            </table>
+            <button onclick="beforPage()">목록으로</button>
+            <button onclick="" style="float: right" >수정</button>
+            <button onclick="" style="float: right">삭제</button>
 
-            <% } %>
+
+
+
+
 
         </div>
     </div>
@@ -79,6 +126,10 @@
 <footer class="container-fluid">
     <p>Footer Text</p>
 </footer>
-
+<script>
+    function beforPage() {
+        location.href="/NewsBoard/boardview";
+    }
+</script>
 </body>
 </html>

@@ -13,7 +13,6 @@ public class ListFucntion extends HttpServlet {
     public ListFucntion(HttpServletRequest request, HttpServletResponse response){
         NewsBoardDao dao = new NewsBoardDao();
         List<NewsBoardDto> list = dao.selectAll();
-        HttpSession session = request.getSession();
         request.setAttribute("list",list);
     }
 }
