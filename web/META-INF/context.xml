@@ -4,7 +4,7 @@
               name="jdbc/orcl"
               driverClassName="oracle.jdbc.driver.OracleDriver"
               type="javax.sql.DataSource"
-              url="jdbc:oracle:thin:@localhost:1521:orcl"
+              url="jdbc:oracle:thin:@localhost:1521:orcl1"
               username="mystudy"
               password="1234"
               loginTimeout="10"

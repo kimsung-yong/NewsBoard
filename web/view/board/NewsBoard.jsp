@@ -87,7 +87,9 @@
                </tr>
                <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
                    System.out.println(list.size());
-
+                    if(list==null){
+                        out.print("글이 없습니다");
+                    }
                   for(int i =0; i<list.size();i++){
 
                %>
