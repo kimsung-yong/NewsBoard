@@ -88,7 +88,6 @@
 
         <div class="col-sm-9">
             <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
-                System.out.println(list.size());
                 for(int i =0; i<list.size();i++){ %>
             <table>
 
@@ -110,9 +109,9 @@
                 </tr>
                 <% } %>
             </table>
-            <button onclick="beforPage()">목록으로</button>
-            <button onclick="" style="float: right" >수정</button>
-            <button onclick="" style="float: right">삭제</button>
+            <button onclick="before()">목록으로</button>
+            <button onclick="modify(<%=list.get(0).getId()%>)" style="float: right" >수정</button>
+            <button onclick="deleteAction(<%=list.get(0).getId()%>)" style="float: right">삭제</button>
 
 
 
@@ -127,8 +126,14 @@
     <p>Footer Text</p>
 </footer>
 <script>
-    function beforPage() {
+    function before() {
         location.href="/NewsBoard/boardview";
+    }
+    function modify(id) {
+        location.href="/NewsBoard/boardview?action=modify&searchtype=id&search="+id;
+    }
+    function deleteAction(id) {
+        location.href="/NewsBoard/boardview?action=delete&id="+id;
     }
 </script>
 </body>

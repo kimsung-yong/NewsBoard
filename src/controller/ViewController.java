@@ -2,10 +2,7 @@ package controller;
 
 import dao.NewsBoardDao;
 import dto.NewsBoardDto;
-import fucntion.ListFucntion;
-import fucntion.SearchFucntion;
-import fucntion.ViewCountFucntion;
-import fucntion.WriteFucntion;
+import fucntion.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,10 +39,20 @@ public class ViewController extends HttpServlet {
         }else if(action.equals("search")){ // 검색
             new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/NewsBoard.jsp").forward(request,response);
-        }else if(action.equals("detailview")){
+        }else if(action.equals("detailview")){//상세페이지
             new ViewCountFucntion(request,response);
             new SearchFucntion(request,response);
             request.getRequestDispatcher("/board/detailPage.jsp").forward(request,response);
+        }else if(action.equals("modify")){//수정
+            new SearchFucntion(request,response);
+            request.getRequestDispatcher("/board/modify.jsp").forward(request,response);
+        }else if(action.equals("modifyResult")){//수정결과
+            new ModifyFucntion(request,response);
+            new SearchFucntion(request,response);
+            request.getRequestDispatcher("/board/detailResult.jsp").forward(request,response);
+        }else if(action.equals("delete")){//삭제
+            new deleteFucntion(request,response);
+            response.sendRedirect("/NewsBoard/boardview");
         }
 
 

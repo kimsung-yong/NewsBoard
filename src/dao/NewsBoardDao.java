@@ -142,5 +142,43 @@ public class NewsBoardDao {
         }
 
     }
+    public void modify(NewsBoardDto dto){
+        conDB();
 
+        try{
+            long id = dto.getId();
+            String name = dto.getName();
+            String title = dto.getTitle();
+            String content = dto.getContent();
+            ps = con.prepareStatement("update newsboard set name= '"+name+"',title= '"+title+"',content= '"+content+"' where id=?");
+            ps.setLong(1,id);
+            ps.executeQuery();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try{
+                ps.close();
+                con.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    public void delete(long id){
+        conDB();
+        try{
+            ps = con.prepareStatement("delete from Newsboard where id="+id);
+            ps.executeQuery();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                ps.close();
+                con.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

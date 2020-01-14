@@ -1,9 +1,11 @@
+<%@ page import="dto.NewsBoardDto" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>Bootstrap Example</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -33,12 +35,33 @@
             }
             .row.content {height: auto;}
         }
-        .col-sm-9 {
-            display: inline-block;
+        .col-sm-9{
             margin-top: 30px;
-            width: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
+        .col-sm-9 table{
 
+
+            width: 100%;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .col-sm-9 table td{
+            border-bottom: 1px solid;
+            /*solid #444444;*/
+            /*padding: 10px;*/
+        }
+        #tb_tr1{
+            height: 50px;
+        }
+        #tb_tr2{
+            height: 50px;
+        }
+        #tb_tr3{
+            height: 400px;
+        }
     </style>
 </head>
 <body>
@@ -48,7 +71,7 @@
         <div class="col-sm-3 sidenav">
             <h4>Blog</h4>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="home.jsp">Home</a></li>
+                <li class="active"><a href="board/home.jsp">Home</a></li>
                 <li><a href="/NewsBoard/boardview">NewsBoard</a></li>
                 <li><a href="#section3">Family</a></li>
                 <li><a href="#section3">Photos</a></li>
@@ -65,20 +88,27 @@
 
         <div class="col-sm-9">
 
-                <h1>뉴스 작성하기 </h1>
-            <form action="/NewsBoard/boardview" method="post">
-                 <input type="hidden" name="action" value="write">
-                 <input type="text" name = "name"  placeholder="이름을 입력하세요"> <br><br>
+            <table>
 
+                <tr id="tb_tr1">
+                    <td>글번호</td>
+                    <td><%=request.getParameter("id")%></td>
+                    <td>작성자</td>
+                    <td><%=request.getParameter("name") %></td>
+                    <td>작성날짜</td>
+                    <td><%=request.getParameter("writedate") %></td>
+                    <td>조회수</td>
+                    <td><%=request.getParameter("viewcount") %></td>
+                </tr>
+                <tr id="tb_tr2">
+                    <td colspan="8"><%=request.getParameter("title") %></td>
+                </tr>
+                <tr id="tb_tr3">
+                    <td colspan="8"><%=request.getParameter("content")%></td>
+                </tr>
 
-                  <input type="text" name="title" placeholder="제목을 입력하세요"><br><br>
-
-                  <textarea name="content" id="" cols="30" rows="10" placeholder="내용을 입력하세요"></textarea>
-                  <br>
-                  <input type="submit" value="저장"><input type="reset" value="재작성">
-
-
-            </form>
+            </table>
+            <button onclick="before()">목록으로</button>
         </div>
     </div>
 </div>
@@ -86,6 +116,13 @@
 <footer class="container-fluid">
     <p>Footer Text</p>
 </footer>
-
+<script>
+    function before() {
+        location.href="/NewsBoard/boardview";
+    }
+    function modify(id) {
+        location.href="/NewsBoard/boardview?action=modify&searchtype=id&search="+id;
+    }
+</script>
 </body>
 </html>

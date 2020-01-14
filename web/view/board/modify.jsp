@@ -1,11 +1,11 @@
-<%@ page import="java.util.List" %>
 <%@ page import="dto.NewsBoardDto" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>Bootstrap Example</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -35,21 +35,43 @@
             }
             .row.content {height: auto;}
         }
-        .col-sm-9{margin-top: 30px;}
-        .col-sm-9 table{
-            margin-right: auto;
+        .col-sm-9{
+            margin-top: 30px;
             margin-left: auto;
-            width: 100%;
-            text-align: center;
+            margin-right: auto;
         }
-        .btn_write{
-            float: right;
-        }
+        .col-sm-9 table{
 
-        th{
+
+            width: 100%;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
             text-align: center;
         }
-        .btn_sc{
+        .col-sm-9 table td{
+            border-bottom: 1px solid;
+            /*solid #444444;*/
+            /*padding: 10px;*/
+        }
+        #tb_tr1{
+            height: 50px;
+        }
+        #tb_tr2{
+            height: 50px;
+        }
+        #tb_tr2 input{
+            border: 0px;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+        }
+        #tb_tr3{
+            height: 400px;
+        }
+        #tb_tr3 textarea{
+            width: 100%;
+            height: 400px;
+            border: 1px;
             text-align: center;
         }
     </style>
@@ -77,43 +99,40 @@
         </div>
 
         <div class="col-sm-9">
-           <table border="1" align="center">
-               <tr>
-                   <th>글번호</th>
-                   <th>작성자</th>
-                   <th>제목</th>
-                   <th>날짜</th>
-                   <th>조회수</th>
-               </tr>
-               <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
-                    if(list==null){
-                        out.print("글이 없습니다");
-                    }
-                  for(int i =0; i<list.size();i++){
+            <% List<NewsBoardDto> list = (List<NewsBoardDto>) request.getAttribute("list");
+                System.out.println(list.size());
+                for(int i =0; i<list.size();i++){ %>
+            <form action="boardview" method="get" >
+            <table>
 
-               %>
-               <tr>
-                   <td><%=list.get(i).getId() %></td>
-                   <td><%=list.get(i).getName() %></td>
-                   <td><a href="http://localhost:8080/NewsBoard/boardview?action=detailview&searchtype=id&search=<%=list.get(i).getId()%>">
-                       <%=list.get(i).getTitle() %></a></td>
-                   <td><%=list.get(i).getWriteDate() %></td>
-                   <td><%=list.get(i).getViewCount() %></td>
-               </tr>
-                 <% } %>
+                <tr id="tb_tr1">
+                    <input type="hidden" name="action" value="modifyResult">
+                    <input type="hidden" name = "id" value="<%=list.get(i).getId() %>">
+                    <td>작성자</td>
+                    <td><input type="text" value="<%=list.get(i).getName() %>" name="name"></td>
+                    <td>작성날짜</td>
+                    <td><%=list.get(i).getWriteDate() %></td>
+                    <td>조회수</td>
+                    <td><%=list.get(i).getViewCount() %></td>
+                </tr>
+                <tr id="tb_tr2">
+                    <td colspan="6"><input type="text" name="title" value="<%=list.get(i).getTitle()%>"> </td>
+                </tr>
+                <tr id="tb_tr3">
+                    <td colspan="6"><textarea name="content" cols="50" placeholder="글을 입력하세요"><%=list.get(i).getContent()%></textarea> </td>
+                </tr>
+                <% } %>
 
-           </table>
-            <br>
-            <form class="btn_sc" action="/NewsBoard/boardview" method="get">
-                <select name="searchtype">
-                    <option value="title">제목</option>
-                </select>
-                <input type="search" name = "search">
-                <input type="hidden" name="action" value="search">
-                <input type="submit" value="검색">
+
+            </table>
+            <input type="submit" value="저장" style="float: right">
+            <button onclick="beforPage()">목록으로</button>
             </form>
 
-            <input type="button" value="글쓰기" onclick="writeclick()" class="btn_write">
+
+
+
+
         </div>
     </div>
 </div>
@@ -122,8 +141,8 @@
     <p>Footer Text</p>
 </footer>
 <script>
-    function writeclick() {
-        location.href="board/write.jsp";
+    function beforPage() {
+        location.href="/NewsBoard/boardview";
     }
 </script>
 </body>
